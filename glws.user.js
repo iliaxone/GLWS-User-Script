@@ -27,20 +27,20 @@ function PopupCenter(url, title, w, h) {
 waitForKeyElements ("#searchResultsRows div.market_listing_table_header", addButtons);
 
 function addButtons(){
-	$('.market_listing_row').each( function(e) {				
-		$(this).find('.market_listing_wear').empty();
+    $('.market_listing_row').each( function(e) {				
+        $(this).find('.market_listing_wear').empty();
         var rowID = $(this).attr('id');
         if(rowID == "market_buyorder_info") {
             return;
         }
         var listingID = rowID.replace('listing_', '');
-	    var assetID = unsafeWindow.g_rgListingInfo[listingID].asset.id;
+        var assetID = unsafeWindow.g_rgListingInfo[listingID].asset.id;
         var inspectLink = unsafeWindow.g_rgListingInfo[listingID].asset.market_actions[0].link;
         inspectLink = inspectLink.replace('steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20', '');
         inspectLink = inspectLink.replace('%listingid%', listingID);
         inspectLink = inspectLink.replace('%assetid%', assetID);
         var url = "https://glws.org/#" + inspectLink;
-		$(this).append("<div style='width: 130px; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto; z-index: 999;' class='market_listing_right_cell market_listing_action_buttons'><a id='"+listingID+"-float' class='btn_green_white_innerfade btn_small' href='javascript:void(0);'><span>Open GLWS</span></a></div>");
+        $(this).append("<div style='width: 130px; position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto; z-index: 999;' class='market_listing_right_cell market_listing_action_buttons'><a id='"+listingID+"-float' class='btn_green_white_innerfade btn_small' href='javascript:void(0);'><span>Open GLWS</span></a></div>");
         $("#"+listingID+"-float").click(function() { PopupCenter(url, "GLWS", 800, 600); });
     });
 }
